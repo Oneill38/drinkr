@@ -11,4 +11,15 @@ class WelcomeController < ApplicationController
     render :json => { latitude: latitude, longitude: longitude}
   end
 
+  def getmerchants
+    response = HTTParty.get("https://api.delivery.com/merchant/search/delivery",
+      :query => {:client_id => ENV['DELIVERY_API_client_id'],
+                        :latitude => params[:latitude],
+                        :longitude => params[:longitude],
+                        :merchant_type => "W" })
+    render :json => response
+  end
+
+
+
 end

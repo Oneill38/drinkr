@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+.merchant {
+  display: inline-block;
+  width: 200px;
+}

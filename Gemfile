@@ -40,6 +40,8 @@ gem 'spring',        group: :development
 
 gem 'geocoder'
 
+gem 'httparty'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec'
