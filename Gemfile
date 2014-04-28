@@ -39,3 +39,11 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'geocoder'
+
+group :development, :test do
+  gem 'pry-rails'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'simplecov', '~> 0.7.1', :require => false
+end
