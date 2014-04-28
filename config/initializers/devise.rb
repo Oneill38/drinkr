@@ -4,7 +4,17 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = '9575bca29335ffb140c86ea0c2417dffe0dd0787a83417b666af5c41f6d4bc53c79154c8958876032c6650d1d84e14767b8542e092eae9ee7f0f942f8a097e5c'
+
+  # Comment fom Colin: added this if statement for production. Ideally, this means that
+  # when new users are created it will generate a random token for them, but only
+  # when in production. I did this with the assumption that we might want to be able
+  # too look at actual passwords in our database if something weird is occuring rather than
+  # having to compare randomly generated keys represtenting passwords.
+  # If this causes issues remove the `if` statment, leaving config.secret_key, and delete this comment.
+
+  if Rails.env.production?
+   config.secret_key = '9575bca29335ffb140c86ea0c2417dffe0dd0787a83417b666af5c41f6d4bc53c79154c8958876032c6650d1d84e14767b8542e092eae9ee7f0f942f8a097e5c'
+  end
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -230,8 +240,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  # omniauth/devise configuration for facebook login
 require "omniauth-facebook"
-config.omniauth :facebook, ENV['fb_id'], ENV['fb_secret']
+  config.omniauth :facebook, '***REMOVED***' , '***REMOVED***'
 
 
   # ==> Warden configuration
