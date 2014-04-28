@@ -39,5 +39,19 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise', '~> 3.2.4'
+
 gem 'omniauth', '~> 1.2.1'
+
 gem 'omniauth-facebook', '~> 1.6.0'
+
+gem 'geocoder'
+
+gem 'httparty'
+
+group :development, :test do
+  gem 'pry-rails'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'simplecov', '~> 0.7.1', :require => false
+end
