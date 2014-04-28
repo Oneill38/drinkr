@@ -242,7 +242,8 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   # omniauth/devise configuration for facebook login
 require "omniauth-facebook"
-  config.omniauth :facebook, '***REMOVED***' , '***REMOVED***'
+  config.omniauth :facebook, '***REMOVED***', '***REMOVED***'
+  # , { :scope => "basic_info" }
 
 
   # ==> Warden configuration
