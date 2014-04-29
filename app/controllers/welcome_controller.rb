@@ -20,4 +20,9 @@ class WelcomeController < ApplicationController
     render :json => response
   end
 
+  def getmenu
+    response = HTTParty.get("https://api.delivery.com/merchant/#{params[:merchant_id]}/menu")
+    render :json => response
+  end
+
 end
