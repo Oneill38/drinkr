@@ -19,7 +19,8 @@ Colin   -> https://github.com/cohart
 
 Travis Badge, link to ERD, link to Pivotal, and Team members!
 
-TO DO: add coveralls badge
+[![Coverage Status](https://coveralls.io/repos/Oneill38/drinkr/badge.png)](https://coveralls.io/r/Oneill38/drinkr)
+
 
 ---
 ` drinkr` aims to bring alcohol to its users quickly and simply. Enter your location, see a list of distributors near you, click the item you'd like to purchase and have it delivered straight to your door.
