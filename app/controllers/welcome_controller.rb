@@ -27,12 +27,3 @@ class WelcomeController < ApplicationController
 
 end
 
-response = HTTParty.post('https://sandbox-api.venmo.com/v1/payments',
-  :query => { :access_token => ENV['VENMO_ID'],
-              :user_id => 145434160922624933,
-              :email => 'venmo@venmo.com',
-              :note => 'it is complete',
-              :amount => 0.10})
-
-
-
