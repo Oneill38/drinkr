@@ -3,8 +3,8 @@ var Landing = {
   onReady: function() {
     $("<div>").addClass("merchants").css( { position:'absolute', top: '20%' }).appendTo("body")
     $("<div>").addClass("items").css({height: '600px', width: '800px'}).appendTo("body")
-    $("<input>").attr( {type:'text', id: 'search_drinks', placeholder: 'enter location'}).css( {position:'absolute', top: '10%', right: '50%' }).appendTo("body");
-    $("#search_drinks").on('keyup', function(event){
+    $("<input>").attr( {type:'text', id: 'search_merchants', placeholder: 'enter location'}).css( {position:'absolute', top: '10%', right: '50%' }).appendTo("body");
+    $("#search_merchants").on('keyup', function(event){
       if (event.which === 13 || event.keyCode === 13){
         var searchString = $(this).val();
         console.log(searchString);
