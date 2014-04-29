@@ -49,9 +49,12 @@ gem 'geocoder'
 gem 'httparty'
 
 group :development, :test do
+  gem 'rubocop'
+  gem 'shoulda-matchers'
   gem 'pry-rails'
-  gem 'rspec'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'simplecov', '~> 0.7.1', :require => false
+  gem 'jasmine'
+  gem 'rails-erd'
 end
