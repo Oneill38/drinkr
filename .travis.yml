@@ -6,6 +6,10 @@ before_script:
   - "export DISPLAY=:99.0"
   - "export JASMINE_SPEC_FORMAT=documentation"
 env:
+  - secure: "LGpQAiKj3h1mWa3w6q9WQ+UeqccfdVkbixTj7L3es/t8XKRbwhgjTbSlfVQLnRZtwH/ligkYDOABOS5o7+rqNNmKAk+GiwC3yYdgMx8skzxqhTZS8nAHr8413Ht/chX1ZsvTF5xcAFXctPyOrCsWaExD6ry6dUAMdQse4jSQwtA="
+  - secure: "ZQyJXtw8ms4zIRnL03x8I/8wji2Uw/MMlCCQTBdxOw7HcqVJieEVpVvrm+7P1nnnVduYaRERgCPchINe/zKZJHZCNecUYsxxaAFVfTLagvlYgf7cVCBDy5Qx0wHjzYW2LzdvSL7jr3qDTgjkWtWCoQYz9I/fYLH7Ms/qcEojpfs="
+  - secure: "L42VCRqhBc+zMXUh4xUkOGNBJsWETZ+dxEQKZfeb/sxtD0lU3ESk1AM42e7k7+MZO5qLZJybNGt91mEjTAuk5tBGPFFYK3Pt4tfwYEdW6imcyY5txnk1ISPP28evld9rrL0TKfLoyhs6MwxYiJ9CGyVFNm5H2/hafNmT3FYYDF8="
+  - secure: "ZnjIUU0OwnR9itXTOcdZvhtAJdhavv9eWYhlT+d4vn7h1prZ04Sq0qmd4ZqOf2undhXGYFHR+p0uvAYaKu1SJVx/Wpd+IrPqlieqtTQfbuxb5iZMkDgk9TQ6xO8J2j1sk+JDJt+ti0FOex+TRrOl2vu0Zxfy8ndlL67HzvRXigs="
   - PG_USERNAME='postgres'
 script:
   - "bundle exec rake db:create"
