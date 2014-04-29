@@ -1,7 +1,8 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/colinhhart/dev/drinkr/app/controllers/welcome_controller.rb": [
+
+      "/Users/talal/dev/wdi/drinkr/app/controllers/welcome_controller.rb": [
         1,
         null,
         1,
@@ -25,13 +26,22 @@
         null,
         null,
         1,
+        0,
+        0,
+        null,
+        null,
         1,
-        1,
+        0,
+        null,
+        null,
+        null,
+        0,
         null,
         null,
         null
       ],
-      "/Users/colinhhart/dev/drinkr/app/controllers/application_controller.rb": [
+
+      "/Users/talal/dev/wdi/drinkr/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -81,6 +91,6 @@
         null
       ]
     },
-    "timestamp": 1398809384
+    "timestamp": 1398798999
   }
 }

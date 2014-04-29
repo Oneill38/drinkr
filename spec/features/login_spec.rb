@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe "signing up process" do
   it "should allow a new user to sign up" do
     visit root_path
