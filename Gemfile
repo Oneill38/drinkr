@@ -49,11 +49,13 @@ gem 'geocoder'
 gem 'httparty'
 
 group :development, :test do
+  gem 'minitest'
   gem 'rubocop'
   gem 'shoulda-matchers'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'simplecov', '~> 0.7.1', :require => false
   gem 'jasmine'
   gem 'rails-erd'
