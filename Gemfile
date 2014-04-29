@@ -58,7 +58,7 @@ group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'simplecov', '~> 0.7.1', :require => false
-  gem 'jasmine' #rails g jasmine:init
+  gem 'jasmine' #rails g jasmine:install
   gem 'rails-erd'
   gem 'coveralls', require: false
 end
