@@ -1,20 +1,21 @@
 language: ruby
 rvm:
-  - 2.1.0
+- 2.1.0
 before_script:
-  - "sh -e /etc/init.d/xvfb start"
-  - "export DISPLAY=:99.0"
-  - "export JASMINE_SPEC_FORMAT=documentation"
+- sh -e /etc/init.d/xvfb start
+- export DISPLAY=:99.0
+- export JASMINE_SPEC_FORMAT=documentation
 env:
-  - secure: "LGpQAiKj3h1mWa3w6q9WQ+UeqccfdVkbixTj7L3es/t8XKRbwhgjTbSlfVQLnRZtwH/ligkYDOABOS5o7+rqNNmKAk+GiwC3yYdgMx8skzxqhTZS8nAHr8413Ht/chX1ZsvTF5xcAFXctPyOrCsWaExD6ry6dUAMdQse4jSQwtA="
-  # - secure: "ZQyJXtw8ms4zIRnL03x8I/8wji2Uw/MMlCCQTBdxOw7HcqVJieEVpVvrm+7P1nnnVduYaRERgCPchINe/zKZJHZCNecUYsxxaAFVfTLagvlYgf7cVCBDy5Qx0wHjzYW2LzdvSL7jr3qDTgjkWtWCoQYz9I/fYLH7Ms/qcEojpfs="
-  # - secure: "L42VCRqhBc+zMXUh4xUkOGNBJsWETZ+dxEQKZfeb/sxtD0lU3ESk1AM42e7k7+MZO5qLZJybNGt91mEjTAuk5tBGPFFYK3Pt4tfwYEdW6imcyY5txnk1ISPP28evld9rrL0TKfLoyhs6MwxYiJ9CGyVFNm5H2/hafNmT3FYYDF8="
-  # - secure: "ZnjIUU0OwnR9itXTOcdZvhtAJdhavv9eWYhlT+d4vn7h1prZ04Sq0qmd4ZqOf2undhXGYFHR+p0uvAYaKu1SJVx/Wpd+IrPqlieqtTQfbuxb5iZMkDgk9TQ6xO8J2j1sk+JDJt+ti0FOex+TRrOl2vu0Zxfy8ndlL67HzvRXigs="
-  # - secure: "b2uMIpt1CmZFfTH36J+q/uyTbMrBmCdcYzLybKVG7YbXuxHKk9QbtOYxmQrf+Q/ZSTbS2lTVjO5tsjPZpJO/hlAqid+5WVmLQ6l/FSN6gEcpnt7JwBflqomcvfnRWmgeM7dvweTUEkEUK/lozTUPyADFCouVdEXQv8FMJLEQ7s4="
-  # - secure: "NmKQlWTw5d2bv+XIFp50EDT68TVcbnC6+5NmGmk7QlcNshk8a/Ob5vAKjkyIT7snQPtsu2HixwWJWPHkC+1ihVWLyYbvP+WZnKGBPp2jldmO7QNk8aadBcVczGmCASTcEXD+deVpUNLfJBPhXAvO0A9blirZQBFu6V7uoAocV8A="
-  # - secure: "jlW78FC1ndfmP16ktYYYacshZGlNCTvbcJBgApZ35EYCYdzUeo27S+BCPDDohi1zXwNPmQkrBDeHk0gK1WXg4p5WXp6KCpAgh1PsefkS7Ft7xvPRjfppELKw1ZeRckkYyHE/9+CkF68IHVRBiQR0YJOLCKY9KMP4M9ZI1vKxxfE="
+  global:
   - PG_USERNAME='postgres'
+  matrix:
+  - secure: Yxdj+YBr39m14EsNrPK4/jQvTsaTeeh3n5nYJs03izeiUJi4nk+78C8asdN8z3iijZjVSsC594PeNbb9pVj8+ErBghvkwenosuHVzMdrneZajzfHGUEd8NZfmNSHTsmYaK5exqa+5cmlkTSiVYoLBJkB18ZTklcWPf/pvrVZpC8=
+  - secure: dV2EAzI3THEnmZI4WaB1/gK1CVb98N6uTQTlJk+46mu9fIBD00AfySJxeF3DMtFFMjopNT6s83XDBaj2yFfi9tcl7UMBHMxs8TsIJiRpePP0hzO9ryxWjQpeHlSvSknAPMXoqGnpM12/bIOISy3otaEzQCYNIsFmTE2/JsTa5/k=
+  - secure: g/KVhKbfwXaVH2eKzTwrJMLWlv8F4Q3FI0IGpsTEplV9thJ+nCsvoybGDy/sTlqsiR8tFbUj/oej+8kudEP5RkpVf5rzS7O/fCGUmB/FgYla73EYHBtq8mGWfNBD6MryDmZPkq2baW57uVcQ2Mcks7KHENh8Nnd/ZOmgbHfUpek=
+  - secure: kM+uSBi8iTLunetB6OJyrrxUqIgq1Ho+86onka+kUMGwGzxP0wE7JlpKNpq5N5MB2PFXAa+GKu3ztrCeCLG4reFkNbs2kTg8lJ+hLGKFyp/kCdlu5YQozc1hRs+56UBnjRhazNWX/4ShIjkWmO34D9xHSRcVj97iyMU0Q6o8d3Q=
+  - secure: RHs9tCxDS749+C/7vCIFqE+UATvVQ23JGe4hzMzUQ5tfK434Snayp0DdizT5Pu5lLx3wnoZzIjXQX21S5Tt0ZifrjlkYYrTkZ+oq0XmGhqOcjR9/rHAFDmV7lym2YSBiL6Lr+b2ZQzcob8g+GUPtmfvO49WA7L0x9IWPKyEyRvA=
+  - secure: ZSIWIYgri4F00OEQnWBp0SnCD62T2TPw8T/HcBSkp6XBHI2rJrq9B3rNd643lzVnaYV1pWZFEBOLobZoFCjkrcaY0p8+Rsd3i3T6qd2NINTGmdDpaS7Wfl7mHuqg9PeQWpqtcfI2PIkmtSNrTs4U+OTulOKaUJ43cPb4OGqZ7Ek=
 script:
-  - "bundle exec rake db:create"
-  - "bundle exec rake db:migrate RAILS_ENV=test"
-  - "bundle exec rake spec"
+- bundle exec rake db:create
+- bundle exec rake db:migrate RAILS_ENV=test
+- bundle exec rake spec
