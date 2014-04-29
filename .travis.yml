@@ -7,12 +7,12 @@ before_script:
   - "export JASMINE_SPEC_FORMAT=documentation"
 env:
   - secure: "LGpQAiKj3h1mWa3w6q9WQ+UeqccfdVkbixTj7L3es/t8XKRbwhgjTbSlfVQLnRZtwH/ligkYDOABOS5o7+rqNNmKAk+GiwC3yYdgMx8skzxqhTZS8nAHr8413Ht/chX1ZsvTF5xcAFXctPyOrCsWaExD6ry6dUAMdQse4jSQwtA="
-  - secure: "ZQyJXtw8ms4zIRnL03x8I/8wji2Uw/MMlCCQTBdxOw7HcqVJieEVpVvrm+7P1nnnVduYaRERgCPchINe/zKZJHZCNecUYsxxaAFVfTLagvlYgf7cVCBDy5Qx0wHjzYW2LzdvSL7jr3qDTgjkWtWCoQYz9I/fYLH7Ms/qcEojpfs="
-  - secure: "L42VCRqhBc+zMXUh4xUkOGNBJsWETZ+dxEQKZfeb/sxtD0lU3ESk1AM42e7k7+MZO5qLZJybNGt91mEjTAuk5tBGPFFYK3Pt4tfwYEdW6imcyY5txnk1ISPP28evld9rrL0TKfLoyhs6MwxYiJ9CGyVFNm5H2/hafNmT3FYYDF8="
-  - secure: "ZnjIUU0OwnR9itXTOcdZvhtAJdhavv9eWYhlT+d4vn7h1prZ04Sq0qmd4ZqOf2undhXGYFHR+p0uvAYaKu1SJVx/Wpd+IrPqlieqtTQfbuxb5iZMkDgk9TQ6xO8J2j1sk+JDJt+ti0FOex+TRrOl2vu0Zxfy8ndlL67HzvRXigs="
-  - secure: "b2uMIpt1CmZFfTH36J+q/uyTbMrBmCdcYzLybKVG7YbXuxHKk9QbtOYxmQrf+Q/ZSTbS2lTVjO5tsjPZpJO/hlAqid+5WVmLQ6l/FSN6gEcpnt7JwBflqomcvfnRWmgeM7dvweTUEkEUK/lozTUPyADFCouVdEXQv8FMJLEQ7s4="
-  - secure: "NmKQlWTw5d2bv+XIFp50EDT68TVcbnC6+5NmGmk7QlcNshk8a/Ob5vAKjkyIT7snQPtsu2HixwWJWPHkC+1ihVWLyYbvP+WZnKGBPp2jldmO7QNk8aadBcVczGmCASTcEXD+deVpUNLfJBPhXAvO0A9blirZQBFu6V7uoAocV8A="
-  - secure: "jlW78FC1ndfmP16ktYYYacshZGlNCTvbcJBgApZ35EYCYdzUeo27S+BCPDDohi1zXwNPmQkrBDeHk0gK1WXg4p5WXp6KCpAgh1PsefkS7Ft7xvPRjfppELKw1ZeRckkYyHE/9+CkF68IHVRBiQR0YJOLCKY9KMP4M9ZI1vKxxfE="
+  # - secure: "ZQyJXtw8ms4zIRnL03x8I/8wji2Uw/MMlCCQTBdxOw7HcqVJieEVpVvrm+7P1nnnVduYaRERgCPchINe/zKZJHZCNecUYsxxaAFVfTLagvlYgf7cVCBDy5Qx0wHjzYW2LzdvSL7jr3qDTgjkWtWCoQYz9I/fYLH7Ms/qcEojpfs="
+  # - secure: "L42VCRqhBc+zMXUh4xUkOGNBJsWETZ+dxEQKZfeb/sxtD0lU3ESk1AM42e7k7+MZO5qLZJybNGt91mEjTAuk5tBGPFFYK3Pt4tfwYEdW6imcyY5txnk1ISPP28evld9rrL0TKfLoyhs6MwxYiJ9CGyVFNm5H2/hafNmT3FYYDF8="
+  # - secure: "ZnjIUU0OwnR9itXTOcdZvhtAJdhavv9eWYhlT+d4vn7h1prZ04Sq0qmd4ZqOf2undhXGYFHR+p0uvAYaKu1SJVx/Wpd+IrPqlieqtTQfbuxb5iZMkDgk9TQ6xO8J2j1sk+JDJt+ti0FOex+TRrOl2vu0Zxfy8ndlL67HzvRXigs="
+  # - secure: "b2uMIpt1CmZFfTH36J+q/uyTbMrBmCdcYzLybKVG7YbXuxHKk9QbtOYxmQrf+Q/ZSTbS2lTVjO5tsjPZpJO/hlAqid+5WVmLQ6l/FSN6gEcpnt7JwBflqomcvfnRWmgeM7dvweTUEkEUK/lozTUPyADFCouVdEXQv8FMJLEQ7s4="
+  # - secure: "NmKQlWTw5d2bv+XIFp50EDT68TVcbnC6+5NmGmk7QlcNshk8a/Ob5vAKjkyIT7snQPtsu2HixwWJWPHkC+1ihVWLyYbvP+WZnKGBPp2jldmO7QNk8aadBcVczGmCASTcEXD+deVpUNLfJBPhXAvO0A9blirZQBFu6V7uoAocV8A="
+  # - secure: "jlW78FC1ndfmP16ktYYYacshZGlNCTvbcJBgApZ35EYCYdzUeo27S+BCPDDohi1zXwNPmQkrBDeHk0gK1WXg4p5WXp6KCpAgh1PsefkS7Ft7xvPRjfppELKw1ZeRckkYyHE/9+CkF68IHVRBiQR0YJOLCKY9KMP4M9ZI1vKxxfE="
   - PG_USERNAME='postgres'
 script:
   - "bundle exec rake db:create"
