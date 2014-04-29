@@ -93,6 +93,7 @@ var Landing = {
     $("<p>").text(merchant.location.street).appendTo(section);
     $("<p>").text(merchant.summary.description).appendTo(section);
     merchantArticle.on( "click", function(event) {
+      $(".items").text("");
       $.ajax({
             type: "GET",
             url: "welcome/getmenu",
@@ -102,8 +103,10 @@ var Landing = {
         console.log(data);
         data.menu.forEach(function(category){
           console.log(category.name);
+          addMenuCategory(category);
           category.children.forEach(function(subcategory){
             console.log(subcategory.name);
+            addMenuSubCategory(subcategory);
             subcategory.children.forEach(function(item){
               addMenuItem(item);
             });
@@ -123,4 +126,18 @@ var Landing = {
     $("<p>").text('Quantity: ' + item.min_qty + " - " + item.max_qty).appendTo(section);
     $("<p>").text(item.price).appendTo(section);
     itemArticle.appendTo(".items");
+  }
+
+  function addMenuCategory(category){
+    var categoryArticle = $("<article>").addClass("category").attr('id','category-'+category.id);
+    var header = $("<header>").appendTo(categoryArticle);
+    $("<h1>").text(category.name).appendTo(header);
+    categoryArticle.appendTo(".items");
+  }
+
+  function addMenuSubCategory(subcategory){
+    var subcategoryArticle = $("<article>").addClass("subcategory").attr('id','subcategory-'+subcategory.id);
+    var header = $("<header>").appendTo(subcategoryArticle);
+    $("<h1>").text(subcategory.name).appendTo(header);
+    subcategoryArticle.appendTo(".items");
   }
