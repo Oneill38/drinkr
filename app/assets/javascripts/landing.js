@@ -1,6 +1,16 @@
 var Landing = {
 
   onReady: function() {
+    $.ajax({
+          type: "GET",
+          url: "welcome/getguesttoken",
+          dataType: "json"
+    }).done(function(data){
+      guestToken = data;
+    });
+    $("<div>").addClass("basket").css( { position:'fixed', top: '3%', right: '3%', height: '100px', width: '200px'} ).appendTo("body")
+    $("<p>").attr( 'id' , 'item_count' ).text("0 item(s)").appendTo(".basket");
+    $("<p>").attr( 'id' , 'subtotal' ).text("0.00 subtotal").appendTo(".basket");
     $("<div>").addClass("merchants").css( { position:'absolute', top: '20%' }).appendTo("body")
     $("<div>").addClass("items").css({height: '600px', width: '800px'}).appendTo("body")
     $("<input>").attr( {type:'text', id: 'search_merchants', placeholder: 'enter location'}).css( {position:'absolute', top: '10%', right: '50%' }).appendTo("body");
@@ -76,7 +86,7 @@ var Landing = {
 
     // $("body").css('background-image', 'url(http://www3.pictures.zimbio.com/mp/iS_rUeuh03Vx.jpg)');
     $("body").css('background-size', 'cover');
-
+    console.log("guest token" + guestToken);
   }
 }
 
@@ -108,7 +118,7 @@ var Landing = {
             console.log(subcategory.name);
             addMenuSubCategory(subcategory);
             subcategory.children.forEach(function(item){
-              addMenuItem(item);
+              addMenuItem(item, merchant.id);
             });
           });
         });
@@ -117,7 +127,7 @@ var Landing = {
     merchantArticle.appendTo(".merchants");
   }
 
-  function addMenuItem(item){
+  function addMenuItem(item, merchant_id){
     var itemArticle = $("<article>").addClass("item").attr('id','item-'+item.id);
     var header = $("<header>").appendTo(itemArticle);
     $("<h1>").text(item.name).appendTo(header);
@@ -125,6 +135,18 @@ var Landing = {
     $("<p>").text(item.description).appendTo(section);
     $("<p>").text('Quantity: ' + item.min_qty + " - " + item.max_qty).appendTo(section);
     $("<p>").text(item.price).appendTo(section);
+    var button = $("<button>").text('Add to Cart').on( "click", function(event){
+      $.ajax({
+            type: "POST",
+            url: "welcome/addtoguestcart",
+            dataType: "json",
+            data: { merchant_id: merchant_id, guest_token: guestToken, item_id: item.id, item_qty: 1}
+      }).done(function(data){
+        $("#subtotal").text(data.subtotal+" subtotal");
+        $("#item_count").text(data.item_count+" item(s)");
+      });
+    });
+    button.appendTo(section);
     itemArticle.appendTo(".items");
   }
 
