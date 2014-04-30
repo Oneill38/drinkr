@@ -26,9 +26,10 @@ describe "visiting the site" do
       find('#merchant-30782').click
       find('#item-N292.item section button').click
       # click_button 'Add to Cart'
-      expect(page).to have_selector('#item_count', text: '0 item(s)')
+#!!!!when we reload page, the cart empties
+      wait_for_ajax
       expect(page).to have_selector('#item_count', text: '1 item(s)')
-      # expect(page).not_to have_selector('#item_count', text: '0 item(s)')
+      expect(page).not_to have_selector('#item_count', text: '0 item(s)')
 
 
 
