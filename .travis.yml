@@ -6,11 +6,14 @@ before_script:
   - "export DISPLAY=:99.0"
   - "export JASMINE_SPEC_FORMAT=documentation"
 env:
-  - secure: "LGpQAiKj3h1mWa3w6q9WQ+UeqccfdVkbixTj7L3es/t8XKRbwhgjTbSlfVQLnRZtwH/ligkYDOABOS5o7+rqNNmKAk+GiwC3yYdgMx8skzxqhTZS8nAHr8413Ht/chX1ZsvTF5xcAFXctPyOrCsWaExD6ry6dUAMdQse4jSQwtA="
-  - secure: "ZQyJXtw8ms4zIRnL03x8I/8wji2Uw/MMlCCQTBdxOw7HcqVJieEVpVvrm+7P1nnnVduYaRERgCPchINe/zKZJHZCNecUYsxxaAFVfTLagvlYgf7cVCBDy5Qx0wHjzYW2LzdvSL7jr3qDTgjkWtWCoQYz9I/fYLH7Ms/qcEojpfs="
-  - secure: "L42VCRqhBc+zMXUh4xUkOGNBJsWETZ+dxEQKZfeb/sxtD0lU3ESk1AM42e7k7+MZO5qLZJybNGt91mEjTAuk5tBGPFFYK3Pt4tfwYEdW6imcyY5txnk1ISPP28evld9rrL0TKfLoyhs6MwxYiJ9CGyVFNm5H2/hafNmT3FYYDF8="
-  - secure: "ZnjIUU0OwnR9itXTOcdZvhtAJdhavv9eWYhlT+d4vn7h1prZ04Sq0qmd4ZqOf2undhXGYFHR+p0uvAYaKu1SJVx/Wpd+IrPqlieqtTQfbuxb5iZMkDgk9TQ6xO8J2j1sk+JDJt+ti0FOex+TRrOl2vu0Zxfy8ndlL67HzvRXigs="
-  - PG_USERNAME='postgres'
+  global:
+    - PG_USERNAME='postgres'
+    - secure: "N1hbklFm2LeLsGekajWTpNM3+dYlYNCSWfuTBxfGxfiBHrn/H7RZkGoi3OdqesD250rXlzNqV4JCJtE3Xv03wxbtAAfkof+ng0M9EXJ4zpeSbui4zv3E735WkrFmq1j7FDpuTC+6oN2BVMTj9ZRLJlQToqtD5EA5V7XlBGXSU8E="
+    - secure: "Vr++1LhMVroOZAsWw8Bl6xI77q1UcAFkFF52trZH4xNGkJvJfdqvqpfEdjTKxLZiH5JM/8X+jp/vHF4rNi4OB98t0sCaC6wXIjC9Dg3yVgOIPwJx6sThfACd4PYh/W7KQotge/vzSKoIEyCectPC2H8jY0zD4MBv8iGCkWSxP6I="
+    - secure: "FDl/ME6d18t3pCIbBJNRZrQ07/fbIrBMvtByYztAoMhbJ9ov+7UmgBLJIFbwujiBearWEuHjCghnjOvJMV0rI7k6CsS5PU2KHr8r1RyI6SY3FOzlOpv2Ay++gSxTc3+YUMaIzWv+DymsFM7mCd/tJr6oVvy7UEKR7BZRHMIeuao="
+    - secure: "AEhb1ZHbEmbzBO1mkHalPoO23e3l7w/sz22uhZXJei1O034ybDWu03YiCAwKCOcs0iosqwKpiK/g2/a/+CSd2+/5XoN9gkIs2kLQ+J1J1pquywh43Z3bnob3vfjWM2X7DoZ44K1FQiJuCqnSB0W2pibqJzeJhG0tPEo+uoIHdic="
+    - secure: "GMHWp3rc2+AvEH5GpvnSNeUfPg17aLfpB8T1owVvvFtWKNV72X6Wvau+ObJ3rDXIb5nBY2h2r1+7diz0gg76NAPiuaMMuN++wREawY/fn3A1Us1WlFYnR5z6RhidbsJEM7itWkmLwvI5AkmeEj6xKFSTWNeVCSe5vJL7f34+umg="
+    - secure: "oHyBcyaziTUo+Krl83Iaox0dZXvr5Vb99+WTDdbpG8xaqQgNyhUcQE9UqxuguOgSsm95nXcUA3T32vIc7WgjpuL8xYjFZmbcLrMIkeSKJ7osMzvaicL0WTUgSQxTkzTqq2HqzOrSkJXcumm1yoJGA6uqwX//G5u7k/Jxxz/CQIs="
 script:
   - "bundle exec rake db:create"
   - "bundle exec rake db:migrate RAILS_ENV=test"
