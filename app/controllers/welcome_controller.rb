@@ -1,7 +1,8 @@
 class WelcomeController < ApplicationController
 
   def index
-
+    @delivery_login_url = "http://sandbox.delivery.com/third_party/authorize?client_id=" + ENV['DELIVERY_API_DEV_client_id'] + "&redirect_uri=http://localhost:3000&response_type=code&scope=global"
+    @delivery_signup_url = "http://sandbox.delivery.com/third_party/account/create?client_id=" + ENV['DELIVERY_API_DEV_client_id'] + "&redirect_uri=http://localhost:3000&response_type=code&scope=global"
   end
 
   def getlocation
@@ -51,5 +52,15 @@ class WelcomeController < ApplicationController
     render :json => response
   end
 
-end
+  def third_party_authorize
+    response = HTTParty.get("http://sandbox.delivery.com/third_party/authorize",
+      :query => { :client_id => ENV['DELIVERY_API_DEV_client_id'],
+        :redirect_uri => "http://localhost:3000",
+        :response_type => "code",
+        :scope => "global" }
+    )
 
+    render :html => response
+  end
+
+end

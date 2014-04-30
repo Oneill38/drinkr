@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delivery.com Third Party Access</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,400,700" type="text/css">
+    <link rel="stylesheet" href="/api_assets/styles/oauth.css" type="text/css">
+
+    <!-- JS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/api_assets/scripts/oauth.js"></script>
+
+</head>
+<body>
+<div id="wrapper">
+    
+<header>
+    <div id="logo"></div>
+    <h1>Log in to your delivery.com account.</h1>
+</header>
+
+<div id="message"></div>
+
+<div id="container">
+    <form method="POST" action="http://sandbox.delivery.com/third_party/authorize" accept-charset="UTF-8" id="login"><input name="_token" type="hidden" value="Yad9I1DJ6WRLR8v8gvP6gyKne8NrYQtqqitP1n6V">	<input placeholder="Email address" name="username" type="text" value="">	<input placeholder="Password" name="password" type="password" value="">
+	<input name="client_id" type="hidden" value="NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj">	<input name="redirect_uri" type="hidden" value="http://localhost:3000">	<input name="response_type" type="hidden" value="code">	<input name="scope" type="hidden" value="global">	<input name="state" type="hidden">	<input name="key" type="hidden">    <input id="guest_token" name="guest_token" type="hidden">	<input name="owner_id" type="hidden" value="1">	<input name="approve" type="hidden" value="1">	<input type="submit" value="Log in">	</form></div>
+<footer>
+    Don't have an account? <a href="/third_party/account/create?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global">Create an account</a> now.
+</footer>
+</div>
+</body>
+</html>
