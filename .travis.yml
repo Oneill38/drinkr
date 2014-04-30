@@ -1,21 +1,22 @@
 language: ruby
 rvm:
-- 2.1.0
+  - 2.1.0
+gemfile:
+  - gemfiles/Gemfile.rails-4.1.x
 before_script:
-- sh -e /etc/init.d/xvfb start
-- export DISPLAY=:99.0
-- export JASMINE_SPEC_FORMAT=documentation
+  - "sh -e /etc/init.d/xvfb start"
+  - "export DISPLAY=:99.0"
+  - "export JASMINE_SPEC_FORMAT=documentation"
 env:
   global:
-  - PG_USERNAME='postgres'
-  - secure: Yxdj+YBr39m14EsNrPK4/jQvTsaTeeh3n5nYJs03izeiUJi4nk+78C8asdN8z3iijZjVSsC594PeNbb9pVj8+ErBghvkwenosuHVzMdrneZajzfHGUEd8NZfmNSHTsmYaK5exqa+5cmlkTSiVYoLBJkB18ZTklcWPf/pvrVZpC8=
-  - secure: dV2EAzI3THEnmZI4WaB1/gK1CVb98N6uTQTlJk+46mu9fIBD00AfySJxeF3DMtFFMjopNT6s83XDBaj2yFfi9tcl7UMBHMxs8TsIJiRpePP0hzO9ryxWjQpeHlSvSknAPMXoqGnpM12/bIOISy3otaEzQCYNIsFmTE2/JsTa5/k=
-  - secure: g/KVhKbfwXaVH2eKzTwrJMLWlv8F4Q3FI0IGpsTEplV9thJ+nCsvoybGDy/sTlqsiR8tFbUj/oej+8kudEP5RkpVf5rzS7O/fCGUmB/FgYla73EYHBtq8mGWfNBD6MryDmZPkq2baW57uVcQ2Mcks7KHENh8Nnd/ZOmgbHfUpek=
-  - secure: kM+uSBi8iTLunetB6OJyrrxUqIgq1Ho+86onka+kUMGwGzxP0wE7JlpKNpq5N5MB2PFXAa+GKu3ztrCeCLG4reFkNbs2kTg8lJ+hLGKFyp/kCdlu5YQozc1hRs+56UBnjRhazNWX/4ShIjkWmO34D9xHSRcVj97iyMU0Q6o8d3Q=
-  - secure: RHs9tCxDS749+C/7vCIFqE+UATvVQ23JGe4hzMzUQ5tfK434Snayp0DdizT5Pu5lLx3wnoZzIjXQX21S5Tt0ZifrjlkYYrTkZ+oq0XmGhqOcjR9/rHAFDmV7lym2YSBiL6Lr+b2ZQzcob8g+GUPtmfvO49WA7L0x9IWPKyEyRvA=
-  - secure: ZSIWIYgri4F00OEQnWBp0SnCD62T2TPw8T/HcBSkp6XBHI2rJrq9B3rNd643lzVnaYV1pWZFEBOLobZoFCjkrcaY0p8+Rsd3i3T6qd2NINTGmdDpaS7Wfl7mHuqg9PeQWpqtcfI2PIkmtSNrTs4U+OTulOKaUJ43cPb4OGqZ7Ek=
-  matrix:
+    - PG_USERNAME='postgres'
+    - secure: "N1hbklFm2LeLsGekajWTpNM3+dYlYNCSWfuTBxfGxfiBHrn/H7RZkGoi3OdqesD250rXlzNqV4JCJtE3Xv03wxbtAAfkof+ng0M9EXJ4zpeSbui4zv3E735WkrFmq1j7FDpuTC+6oN2BVMTj9ZRLJlQToqtD5EA5V7XlBGXSU8E="
+    - secure: "Vr++1LhMVroOZAsWw8Bl6xI77q1UcAFkFF52trZH4xNGkJvJfdqvqpfEdjTKxLZiH5JM/8X+jp/vHF4rNi4OB98t0sCaC6wXIjC9Dg3yVgOIPwJx6sThfACd4PYh/W7KQotge/vzSKoIEyCectPC2H8jY0zD4MBv8iGCkWSxP6I="
+    - secure: "FDl/ME6d18t3pCIbBJNRZrQ07/fbIrBMvtByYztAoMhbJ9ov+7UmgBLJIFbwujiBearWEuHjCghnjOvJMV0rI7k6CsS5PU2KHr8r1RyI6SY3FOzlOpv2Ay++gSxTc3+YUMaIzWv+DymsFM7mCd/tJr6oVvy7UEKR7BZRHMIeuao="
+    - secure: "AEhb1ZHbEmbzBO1mkHalPoO23e3l7w/sz22uhZXJei1O034ybDWu03YiCAwKCOcs0iosqwKpiK/g2/a/+CSd2+/5XoN9gkIs2kLQ+J1J1pquywh43Z3bnob3vfjWM2X7DoZ44K1FQiJuCqnSB0W2pibqJzeJhG0tPEo+uoIHdic="
+    - secure: "GMHWp3rc2+AvEH5GpvnSNeUfPg17aLfpB8T1owVvvFtWKNV72X6Wvau+ObJ3rDXIb5nBY2h2r1+7diz0gg76NAPiuaMMuN++wREawY/fn3A1Us1WlFYnR5z6RhidbsJEM7itWkmLwvI5AkmeEj6xKFSTWNeVCSe5vJL7f34+umg="
+    - secure: "oHyBcyaziTUo+Krl83Iaox0dZXvr5Vb99+WTDdbpG8xaqQgNyhUcQE9UqxuguOgSsm95nXcUA3T32vIc7WgjpuL8xYjFZmbcLrMIkeSKJ7osMzvaicL0WTUgSQxTkzTqq2HqzOrSkJXcumm1yoJGA6uqwX//G5u7k/Jxxz/CQIs="
 script:
-- bundle exec rake db:create
-- bundle exec rake db:migrate RAILS_ENV=test
-- bundle exec rake spec
+  - "bundle exec rake db:create"
+  - "bundle exec rake db:migrate RAILS_ENV=test"
+  - "bundle exec rake spec"
