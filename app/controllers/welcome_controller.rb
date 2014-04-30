@@ -1,8 +1,17 @@
 class WelcomeController < ApplicationController
 
   def index
-    @delivery_login_url = "http://sandbox.delivery.com/third_party/authorize?client_id=" + ENV['DELIVERY_API_DEV_client_id'] + "&redirect_uri=http://localhost:3000&response_type=code&scope=global"
-    @delivery_signup_url = "http://sandbox.delivery.com/third_party/account/create?client_id=" + ENV['DELIVERY_API_DEV_client_id'] + "&redirect_uri=http://localhost:3000&response_type=code&scope=global"
+    @delivery_user_code = params[:code]
+    @venmo_token = params[:access_token]
+
+    # if params[:code]
+    #   :json => { delivery_user_code: params[:code] , venmo_token: params[:access_token] }
+    # end
+
+    # if params[:access_token]
+    #   :json => { delivery_user_code: params[:code] , venmo_token: params[:access_token] }
+    # end
+
   end
 
   def getlocation
@@ -59,8 +68,11 @@ class WelcomeController < ApplicationController
         :response_type => "code",
         :scope => "global" }
     )
+    render :json => response.to_json
+  end
 
-    render :html => response
+  def authorize
+    binding.pry
   end
 
 end
