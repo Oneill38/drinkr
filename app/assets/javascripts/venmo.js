@@ -17,31 +17,13 @@
 // response = HTTParty.get('https://api.venmo.com/v1/users/1103723682070528280/friends?',
 //   :query => {:access_token => 'Px2vW5wqcsSKPuEN6XVbDAw2aXwWBLZT'})
 
-var venmo_functioning = {
+// var venmo_functioning = {
 
-  onReady: function(){
-    $("#venmo_login").on("click", function(event){
-      $.ajax({
-        type: 'GET',
+//   onReady: function(){
+//     $("#venmo_login").on("click", function(event){
+//       $.ajax({
+//         type: 'GET'
 
-      });
-    });
-
-
-
-
-
-  };
-
-
-
-
-
-
-
-
-
-
-
-
-}
+//       });
+//     });
+// }
