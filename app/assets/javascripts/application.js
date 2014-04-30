@@ -16,3 +16,5 @@
 //= require_tree .
 
 var guestToken = "";
+var deliveryUserToken = "";
+var venmoToken = "";

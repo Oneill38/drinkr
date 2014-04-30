@@ -8,6 +8,18 @@ var Landing = {
     }).done(function(data){
       guestToken = data;
     });
+    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/authorize?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global').attr('id','deliveryloginlink').text("Login with Delivery.com").appendTo("body");
+    // $("#deliveryloginlink").on('click',function(event){
+      // $.ajax({
+      //   type: "GET",
+      //   url: "welcome/thirdpartyauthorize"
+      // }).done(function(data){
+      //   $("<div>").attr('id','del_login_div').css('background-color','white').css( { position:'fixed', top: '50%', right: '50%' } ).appendTo("body");
+      //   var newData = data.replace("/api_assets/styles/oauth.css", "//sandbox.delivery.com/api_assets/styles/oauth.css")
+      //         .replace("/api_assets/scripts/oauth.js", "//sandbox.delivery.com/api_assets/scripts/oauth.js");
+      //   $("#del_login_div").html(newData);
+      // });
+    // });
     $("<div>").addClass("basket").css( { position:'fixed', top: '3%', right: '3%', height: '100px', width: '200px'} ).appendTo("body");
     $("<p>").attr( 'id' , 'item_count' ).text("0 item(s)").appendTo(".basket");
     $("<p>").attr( 'id' , 'subtotal' ).text("0.00 subtotal").appendTo(".basket");
