@@ -1,8 +1,6 @@
 language: ruby
 rvm:
   - 2.1.0
-gemfile:
-  - gemfiles/Gemfile.rails-4.1.x
 before_script:
   - "sh -e /etc/init.d/xvfb start"
   - "export DISPLAY=:99.0"
