@@ -29,6 +29,12 @@ describe "Sign Up process" do
     fill_in 'Password', with: 'raphraph'
     fill_in 'Password confirmation', with: 'raphraph'
     click_button 'Sign up'
+    click_on 'Sign out'
+    click_link "Sign up"
+    fill_in 'Email', with: 'raph@raph.com'
+    fill_in 'Password', with: 'raphraph'
+    fill_in 'Password confirmation', with: 'raphraph'
+    click_button 'Sign up'
 # This is actually logging in properly.
 # It is not catching that this email has already been used.
     expect(page).to have_content('Email has already been taken')
@@ -39,6 +45,12 @@ end
 describe "Sign In process" do
    it "should allow a returning user to sign in" do
     visit root_path
+    click_link "Sign up"
+    fill_in 'Email', with: 'raph@raph.com'
+    fill_in 'Password', with: 'raphraph'
+    fill_in 'Password confirmation', with: 'raphraph'
+    click_button 'Sign up'
+    click_on 'Sign out'
     click_link "Sign in"
     fill_in 'Email', with: 'raph@raph.com'
     fill_in 'Password', with: 'raphraph'
