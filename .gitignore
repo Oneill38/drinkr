@@ -16,4 +16,4 @@
 /tmp
 
 # IGNORE FACEBOOK SECRET TOKENS
-/config/initializers/constants.rb
+
