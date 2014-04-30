@@ -50,6 +50,7 @@ gem 'httparty'
 
 
 group :development, :test do
+  gem 'rake', '~> 10.3.1'
   gem 'minitest'
   gem 'rubocop'
   gem 'shoulda-matchers'
