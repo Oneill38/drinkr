@@ -37,8 +37,16 @@ class WelcomeController < ApplicationController
     response = HTTParty.post("http://sandbox.delivery.com/customer/cart/#{params[:merchant_id]}",
       :headers => { "Guest-Token" => params[:guest_token]},
       :query => { :client_id => ENV['DELIVERY_API_DEV_client_id'],
-       :item => { :item_id => params[:item_id], :item_qty => params[:item_qty] }
-       }
+        :item => { :item_id => params[:item_id], :item_qty => params[:item_qty] }
+      }
+    )
+    render :json => response
+  end
+
+  def retrieveguestcart
+    response = HTTParty.get("http://sandbox.delivery.com/customer/cart/#{params[:merchant_id]}",
+      :headers => { "Guest-Token" => params[:guest_token] },
+      :query => { :client_id => ENV['DELIVERY_API_DEV_client_id'], :order_type => "pickup"}
     )
     render :json => response
   end
