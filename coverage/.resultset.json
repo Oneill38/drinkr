@@ -1,12 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-    },
-    "timestamp": 1398882699
-  },
-  "Cucumber Features": {
-    "coverage": {
-      "/Users/colinhhart/dev/drinkr/app/controllers/welcome_controller.rb": [
+      "/Users/talal/dev/wdi/drinkr/app/controllers/welcome_controller.rb": [
         1,
         null,
         1,
@@ -54,15 +49,13 @@
         null,
         null,
         1,
-        2,
+        0,
         null,
         null,
         null,
-        2,
+        0,
         null,
         null,
-<<<<<<< HEAD
-=======
         1,
         0,
         null,
@@ -77,44 +70,6 @@
         null
       ],
       "/Users/talal/dev/wdi/drinkr/app/controllers/application_controller.rb": [
->>>>>>> a619c4346a57adab681fa679f8eead2a26fe18b3
-        1,
-        0,
-        null,
-        null,
-<<<<<<< HEAD
-=======
-        1,
-        null
-      ]
-    },
-    "timestamp": 1398882504
-  },
-  "Cucumber Features": {
-    "coverage": {
-      "/Users/rew38/dev/wdi/drinkr/app/controllers/welcome_controller.rb": [
-        1,
-        null,
-        1,
->>>>>>> a619c4346a57adab681fa679f8eead2a26fe18b3
-        null,
-        null,
-        null,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        null,
-        0,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/colinhhart/dev/drinkr/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -122,6 +77,6 @@
         null
       ]
     },
-    "timestamp": 1398882991
+    "timestamp": 1398883668
   }
 }
