@@ -48,6 +48,7 @@ gem 'geocoder'
 
 gem 'httparty'
 
+
 group :development, :test do
   gem 'rake', '~> 10.3.1'
   gem 'minitest'
@@ -58,6 +59,7 @@ group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'simplecov', '~> 0.7.1', :require => false
-  gem 'jasmine'
+  gem 'jasmine' #rails g jasmine:install
   gem 'rails-erd'
+  gem 'coveralls', require: false
 end
