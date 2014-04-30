@@ -13,7 +13,6 @@ env:
   - secure: fqLq5RcqiPC4i23tiHCv7iRlsfK2d6cJ7uuQY+9oECX3dFMOFXbvkJKxp8PASL08tSjTuNZsKe90O8ttqQqQPoGgAJSBOkd+Gzqgc94nTp4BU3duvsrAM24/YQYYhRs8Riph93fQs2cfWTcgpi/h7aMFwE9vTG+iEPLT2Rg3bc4=
   - secure: l0aVv3dn4ND9LVy2AiGvsx3Ikv7MOdaplOOcUbdm5VliS6y3AWILIZPcFW+kaFWeC54x3HjS0SePB0K3jz3Se7as7rOMkFDW3t35CF2uFcOVcYsJDL9LeghTXIGqfsC3r8+vxL+aYkVcPT49a2Usz6nyeIykrvqb1h366Y4XNSs=
   - secure: nen6ZLjOORrvvehqQMWp/UV18myoASV874OUI5vm8i/PKOEcPiTjRg7w495eBmfG223YC1siE88/29lr9CNeKGewSSOi2IxwQyEQyJUQhdnBcgaQIEAs2MW4p7eskhH1esqCXIKUUECMgMUwPieCrDB0CGLSZBVxMfxMnPR3CTg=
-  matrix:
 script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate RAILS_ENV=test
