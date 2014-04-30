@@ -8,8 +8,8 @@ before_script:
   - "export DISPLAY=:99.0"
   - "export JASMINE_SPEC_FORMAT=documentation"
 env:
-    - PG_USERNAME='postgres'
   global:
+    - PG_USERNAME='postgres'
     - secure: "N1hbklFm2LeLsGekajWTpNM3+dYlYNCSWfuTBxfGxfiBHrn/H7RZkGoi3OdqesD250rXlzNqV4JCJtE3Xv03wxbtAAfkof+ng0M9EXJ4zpeSbui4zv3E735WkrFmq1j7FDpuTC+6oN2BVMTj9ZRLJlQToqtD5EA5V7XlBGXSU8E="
     - secure: "Vr++1LhMVroOZAsWw8Bl6xI77q1UcAFkFF52trZH4xNGkJvJfdqvqpfEdjTKxLZiH5JM/8X+jp/vHF4rNi4OB98t0sCaC6wXIjC9Dg3yVgOIPwJx6sThfACd4PYh/W7KQotge/vzSKoIEyCectPC2H8jY0zD4MBv8iGCkWSxP6I="
     - secure: "FDl/ME6d18t3pCIbBJNRZrQ07/fbIrBMvtByYztAoMhbJ9ov+7UmgBLJIFbwujiBearWEuHjCghnjOvJMV0rI7k6CsS5PU2KHr8r1RyI6SY3FOzlOpv2Ay++gSxTc3+YUMaIzWv+DymsFM7mCd/tJr6oVvy7UEKR7BZRHMIeuao="
