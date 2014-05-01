@@ -161,7 +161,7 @@ var Landing = {
     var qty = $("<input>").attr('type','text').attr('placeholder','quantity').appendTo(section);
     section.append("<br>" + item.min_qty + " - " + item.max_qty);
     $("<p>").text("$ " + item.price).appendTo(section);
-    var button = $("<button>").text('Add to Cart').on( "click", function(event){
+    var button = $("<button>").text('Add to Cart').attr('id','button-'+item.id).on( "click", function(event){
       var merchantOpen = $(".merchant").eq(current_merchant_index).find("input[id=open]").val();
       if (merchantOpen === "true"){
         $.ajax({
