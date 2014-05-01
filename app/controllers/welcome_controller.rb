@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
         :query => { :client_id => ENV['DELIVERY_API_DEV_client_id'],
           :grant_type => "authorization_code",
           :client_secret => ENV['DELIVERY_API_DEV_secret'],
-          :redirect_uri => "http://localhost:3000",
+          :redirect_uri => "http://drink-r.herokuapp.com",
           :code => params[:code]
         }
       )
