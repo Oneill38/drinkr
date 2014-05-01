@@ -8,11 +8,13 @@
       <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
   <% end %>
 <br><br>
-
-<a href="https://api.venmo.com/v1/oauth/authorize?client_id=1702&scope=make_payments%20access_profile%20access_friends">Sign in to Venmo</a>
-
+<a href="https://api.venmo.com/v1/oauth/authorize?client_id=1702&scope=make_payments%20access_profile%20aaccess_friends">Sign in to Venmo</a>
+<% if user_signed_in? && current_user.delivery_token %>
+  <script type="text/javascript">
+    deliveryUserToken = "<%= current_user.delivery_token %>";
+  </script>
+<% end %>
 <script type="text/javascript">
   $(document).ready(Landing.onReady);
-  deliveryUserToken = "<%= @delivery_user_code %>";
   venmoToken = "<%= @venmo_token %>";
 </script>
