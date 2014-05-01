@@ -24,7 +24,8 @@ describe "visiting the site" do
       fill_in 'search_merchants', with: 'soho'
       find_field('search_merchants').native.send_key("\n")
       find('#merchant-30782').click
-      find('#item-N292.item section button').click
+      find('#item-N292.item button').click
+      # click_button 'Add to Cart'
       # click_button 'Add to Cart'
 #!!!!when we reload page, the cart empties
       wait_for_ajax
