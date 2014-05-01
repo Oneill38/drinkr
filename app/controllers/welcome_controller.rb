@@ -77,13 +77,38 @@ class WelcomeController < ApplicationController
 
   def makevenmopayment
     amount = "-" + params[:amount]
-    response = HTTParty.post('https://sandbox-api.venmo.com/v1/payments',
-     :query => { :access_token => $venmo_token,
-                 :email => params[:email],
-                 :note => params[:note],
-                 :amount => amount})
+
+    if params[:email].include?("@")
+
+      response = HTTParty.post('https://sandbox-api.venmo.com/v1/payments',
+       :query => { :access_token => $venmo_token,
+                   :email => params[:email],
+                   :note => params[:note],
+                   :amount => amount})
+    else
+      response = HTTParty.post('https://sandbox-api.venmo.com/v1/payments',
+       :query => { :access_token => $venmo_token,
+                   :user_id => params[:email],
+                   :note => params[:note],
+                   :amount => amount})
+    end
+
 
     render :json => response.to_json
+  end
+
+  def getvenmofriends
+    response = HTTParty.get("https://api.venmo.com/v1/users/#{params[:user_id]}/friends?",
+     :query => {:access_token => $venmo_token})
+
+    render :json => response.to_json
+  end
+
+  def venmoid
+   response = HTTParty.get("https://api.venmo.com/v1/me?",
+    :query => {:access_token => $venmo_token })
+
+   render :json => response.to_json
   end
 
 end
