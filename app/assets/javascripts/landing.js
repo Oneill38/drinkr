@@ -9,17 +9,6 @@ var Landing = {
       guestToken = data;
     });
     $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/authorize?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global').attr('id','deliveryloginlink').text("Login with Delivery.com").appendTo("body");
-    // $("#deliveryloginlink").on('click',function(event){
-      // $.ajax({
-      //   type: "GET",
-      //   url: "welcome/thirdpartyauthorize"
-      // }).done(function(data){
-      //   $("<div>").attr('id','del_login_div').css('background-color','white').css( { position:'fixed', top: '50%', right: '50%' } ).appendTo("body");
-      //   var newData = data.replace("/api_assets/styles/oauth.css", "//sandbox.delivery.com/api_assets/styles/oauth.css")
-      //         .replace("/api_assets/scripts/oauth.js", "//sandbox.delivery.com/api_assets/scripts/oauth.js");
-      //   $("#del_login_div").html(newData);
-      // });
-    // });
     $("<div>").addClass("basket").css( { position:'fixed', top: '3%', right: '3%', height: '100px', width: '200px'} ).appendTo("body");
     $("<p>").attr( 'id' , 'item_count' ).text("0 item(s)").appendTo(".basket");
     $("<p>").attr( 'id' , 'subtotal' ).text("0.00 subtotal").appendTo(".basket");
@@ -58,8 +47,8 @@ var Landing = {
         current_merchant_index += 1;
         if (current_merchant_index < 0){
           current_merchant_index = 0;
-        } else if (current_merchant_index > 19){
-          current_merchant_index = 19;
+        } else if (current_merchant_index > $(".merchant").size()){
+          current_merchant_index = $(".merchant").size();
         }
         $(".merchant").map(function(index, merchantArticle){
           var newPosition = ((index - current_merchant_index)*100)+50;
@@ -73,8 +62,8 @@ var Landing = {
         current_merchant_index -= 1;
         if (current_merchant_index < 0){
           current_merchant_index = 0;
-        } else if (current_merchant_index > 19){
-          current_merchant_index = 19;
+        } else if (current_merchant_index > $(".merchant").size()){
+          current_merchant_index = $(".merchant").size();
         }
         $(".merchant").map(function(index, merchantArticle){
           var newPosition = ((index - current_merchant_index)*100)+50;
@@ -111,23 +100,27 @@ var Landing = {
     $("body").on('keyup', function(event){
       if (event.which === 40 || event.keyCode === 40){
         var merchant_index = $(".merchant").eq(current_merchant_index).attr('id').replace('merchant-', '');
-        $(".merchant").eq(current_merchant_index).css({ top: '30%', left: '30%', width: '60%', height: '80%'});
-        $.ajax({
-          type: "GET",
-          url: "welcome/getmenu",
-          dataType: "json",
-          data: { merchant_id: merchant_index }
-        }).done(function(data){
-          data.menu.forEach(function(category){
-            addMenuCategory(category);
-            category.children.forEach(function(subcategory){
-              addMenuSubCategory(subcategory);
-              subcategory.children.forEach(function(item){
-                addMenuItem(item, merchant_index);
+        var expanded = $(".merchant").eq(current_merchant_index).find("input[id=expanded]").val();
+        if (expanded==="false"){
+          $(".merchant").eq(current_merchant_index).css({ top: '30%', left: '30%', width: '60%', height: '80%'});
+          $.ajax({
+            type: "GET",
+            url: "welcome/getmenu",
+            dataType: "json",
+            data: { merchant_id: merchant_index }
+          }).done(function(data){
+            data.menu.forEach(function(category){
+              addMenuCategory(category);
+              category.children.forEach(function(subcategory){
+                addMenuSubCategory(subcategory);
+                subcategory.children.forEach(function(item){
+                  addMenuItem(item, merchant_index);
+                });
               });
             });
           });
-        });
+          $(".merchant").eq(current_merchant_index).find("input[id=expanded]").val(true);
+        }
       }
     });
 
@@ -148,26 +141,14 @@ var Landing = {
     $("<p>").text('Rating: ' + merchant.summary.overall_rating + " based on " + merchant.summary.num_ratings + " ratings" ).appendTo(section);
     $("<p>").text('Distance: ' + merchant.location.distance).appendTo(section);
     $("<p>").text(merchant.location.street).appendTo(section);
+    if (merchant.ordering.is_open){
+      $("<p>").text("OPEN").appendTo(section);
+    } else {
+      $("<p>").text("CLOSED").appendTo(section);
+    }
+    $("<input>").attr('id','open').attr('type','hidden').attr('value',merchant.ordering.is_open).appendTo(section);
+    $("<input>").attr('id','expanded').attr('type','hidden').attr('value',false).appendTo(section);
     $("<p>").text(merchant.summary.description).appendTo(section);
-    merchantArticle.on( "click", function(event) {
-      merchantArticle.css({ top: '30%', left: '30%', width: '60%', height: '80%'});
-      $.ajax({
-        type: "GET",
-        url: "welcome/getmenu",
-        dataType: "json",
-        data: { merchant_id: merchant.id }
-      }).done(function(data){
-        data.menu.forEach(function(category){
-          addMenuCategory(category);
-          category.children.forEach(function(subcategory){
-            addMenuSubCategory(subcategory);
-            subcategory.children.forEach(function(item){
-              addMenuItem(item, merchant.id);
-            });
-          });
-        });
-      });
-    });
     merchantArticle.appendTo(".merchants");
   }
 
@@ -181,17 +162,20 @@ var Landing = {
     section.append("<br>" + item.min_qty + " - " + item.max_qty);
     $("<p>").text("$ " + item.price).appendTo(section);
     var button = $("<button>").text('Add to Cart').on( "click", function(event){
-      $.ajax({
-        type: "POST",
-        url: "welcome/addtoguestcart",
-        dataType: "json",
-        data: { merchant_id: merchant_id, guest_token: guestToken, item_id: item.id, item_qty: 1}
-      }).done(function(data){
-        console.log(data);
-        $("#subtotal").text(data.subtotal+" subtotal");
-        $("#item_count").text(data.item_count +" item(s)");
-        $(".basket").attr( "merchant_id", merchant_id );
-      });
+      var merchantOpen = $(".merchant").eq(current_merchant_index).find("input[id=open]").val();
+      if (merchantOpen === "true"){
+        $.ajax({
+          type: "POST",
+          url: "welcome/addtoguestcart",
+          dataType: "json",
+          data: { merchant_id: merchant_id, guest_token: guestToken, item_id: item.id, item_qty: 1}
+        }).done(function(data){
+          console.log(data);
+          $("#subtotal").text(data.subtotal+" subtotal");
+          $("#item_count").text(data.item_count +" item(s)");
+          $(".basket").attr( "merchant_id", merchant_id );
+        });
+      }
     });
     button.appendTo(section);
     itemArticle.appendTo($(".merchant").eq(current_merchant_index));
