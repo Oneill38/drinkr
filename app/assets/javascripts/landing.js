@@ -186,7 +186,7 @@ var Landing = {
       }
     });
 
-    $("body").css('background-image', 'url(http://www3.pictures.zimbio.com/mp/iS_rUeuh03Vx.jpg)');
+    $("body").css('background-image', 'url(http://www.piquenewsmagazine.com/imager/no-major-revamp-of-liquor-laws-on-horizon/b/original/2302590/6b09/news_whistler3.jpg)');
     $("body").css('background-size', 'cover');
 
     $("<button>").attr('id','addlocation').text("Add Location").appendTo("body");

@@ -13,6 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
 .merchant {
   -moz-transition: all .5s ease;
   -webkit-transition: all .5s ease;
