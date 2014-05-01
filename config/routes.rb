@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get 'welcome/thirdpartyauthorize' => 'welcome#third_party_authorize'
   post 'api/third_party/authorize' => 'welcome#authorize'
   post 'welcome/makevenmopayment' => 'welcome#makevenmopayment'
+  get 'welcome/getvenmofriends' => 'welcome#getvenmofriends'
+  get 'welcome/venmoid' => 'welcome#venmoid'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
