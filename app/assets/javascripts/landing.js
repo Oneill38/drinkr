@@ -188,6 +188,18 @@ var Landing = {
 
     $("body").css('background-image', 'url(http://www3.pictures.zimbio.com/mp/iS_rUeuh03Vx.jpg)');
     $("body").css('background-size', 'cover');
+
+    $("<button>").attr('id','addlocation').text("Add Location").appendTo("body");
+    $("#addlocation").on('click', function(event){
+      $.ajax({
+        type: "GET",
+        url: "welcome/createlocation",
+        dataType: "json",
+        data: { delivery_token: deliveryUserToken }
+      }).done(function(data){
+        console.log(data);
+      });
+    });
   }
 }
 
