@@ -63,7 +63,7 @@
   -webkit-transition: all .5s ease;
   transition: all .5s ease;
   background-color: rgba(255,255,255,.95);
-  z-index: 1;
+  z-index: 0;
   border-radius: 5px;
   overflow: auto;
   border: 20px solid rgba(0, 0, 0, 0);
@@ -90,4 +90,8 @@ a {
   -moz-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+}
+
+#venmo_split {
+  z-index: 2;
 }

@@ -1,7 +1,7 @@
 {
   "Cucumber Features": {
     "coverage": {
-      "/Users/rew38/dev/wdi/drinkr/app/controllers/welcome_controller.rb": [
+      "/Users/colinhhart/dev/drinkr/app/controllers/welcome_controller.rb": [
         1,
         null,
         1,
@@ -81,7 +81,8 @@
         null,
         null
       ],
-      "/Users/rew38/dev/wdi/drinkr/app/controllers/application_controller.rb": [
+
+      "/Users/colinhhart/dev/drinkr/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -89,6 +90,7 @@
         null
       ]
     },
-    "timestamp": 1398957927
+
+    "timestamp": 1398958417
   }
 }
