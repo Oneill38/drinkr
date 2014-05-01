@@ -85,6 +85,26 @@ var Landing = {
 
     $("body").on('keyup', function(event){
       if (event.which === 38 || event.keyCode === 38){
+        $.ajax({
+          type: "GET",
+          url: "welcome/retrieveguestcart",
+          dataType: "json",
+          data: { merchant_id: $(".basket").attr('merchant_id'), guest_token: guestToken }
+        }).done(function(data){
+          console.log(data);
+          $(".basket").css({width: '250px', height: '400px'});
+          $(".basket").text("");
+          data.cart.forEach(function(item){
+            addBasketItem(item);
+          });
+          $("<p>").attr( 'id' , 'item_count' ).text(data.item_count+" item(s)").appendTo(".basket");
+          $("<p>").attr( 'id' , 'subtotal' ).text(data.subtotal+" subtotal").appendTo(".basket");
+          $("<p>").attr( 'id' , 'tax' ).text( data.tax + " tax").appendTo(".basket");
+          $("<p>").attr( 'id' , 'total' ).text( data.total +" total").appendTo(".basket");
+          $("<button>").text("Checkout").appendTo(".basket");
+          $("<button>").attr('id','venmo_split').text("Split using Venmo!").appendTo(".basket");
+          venmoFunctioning.onReady();
+        });
       }
     });
 
@@ -113,27 +133,6 @@ var Landing = {
 
     $("body").css('background-image', 'url(http://www3.pictures.zimbio.com/mp/iS_rUeuh03Vx.jpg)');
     $("body").css('background-size', 'cover');
-
-    $(".basket").on( 'click' , function(event){
-      $.ajax({
-        type: "GET",
-        url: "welcome/retrieveguestcart",
-        dataType: "json",
-        data: { merchant_id: $(".basket").attr('merchant_id'), guest_token: guestToken }
-      }).done(function(data){
-        console.log(data);
-        $(".basket").css({width: '250px', height: '400px'});
-        $(".basket").text("");
-        data.cart.forEach(function(item){
-          addBasketItem(item);
-        });
-        $("<p>").attr( 'id' , 'item_count' ).text(data.item_count+" item(s)").appendTo(".basket");
-        $("<p>").attr( 'id' , 'subtotal' ).text(data.subtotal+" subtotal").appendTo(".basket");
-        $("<p>").attr( 'id' , 'tax' ).text( data.tax + " tax").appendTo(".basket");
-        $("<p>").attr( 'id' , 'total' ).text( data.total +" total").appendTo(".basket");
-        $("<button>").text("Checkout").appendTo(".basket");
-      });
-    });
 
   }
 }
