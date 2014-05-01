@@ -8,12 +8,23 @@ var Landing = {
     }).done(function(data){
       guestToken = data;
     });
+    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/authorize?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global').attr('id','deliveryloginlink').text("Login with Delivery.com").appendTo("body");
+    // $("#deliveryloginlink").on('click',function(event){
+      // $.ajax({
+      //   type: "GET",
+      //   url: "welcome/thirdpartyauthorize"
+      // }).done(function(data){
+      //   $("<div>").attr('id','del_login_div').css('background-color','white').css( { position:'fixed', top: '50%', right: '50%' } ).appendTo("body");
+      //   var newData = data.replace("/api_assets/styles/oauth.css", "//sandbox.delivery.com/api_assets/styles/oauth.css")
+      //         .replace("/api_assets/scripts/oauth.js", "//sandbox.delivery.com/api_assets/scripts/oauth.js");
+      //   $("#del_login_div").html(newData);
+      // });
+    // });
     $("<div>").addClass("basket").css( { position:'fixed', top: '3%', right: '3%', height: '100px', width: '200px'} ).appendTo("body");
     $("<p>").attr( 'id' , 'item_count' ).text("0 item(s)").appendTo(".basket");
     $("<p>").attr( 'id' , 'subtotal' ).text("0.00 subtotal").appendTo(".basket");
     $("<div>").addClass("merchants").css( { position:'absolute', top: '20%' }).appendTo("body");
-    $("<div>").addClass("items").css({height: '600px', width: '800px'}).appendTo("body");
-    $("<input>").attr( {type:'text', id: 'search_merchants', placeholder: 'enter location'}).css( {position:'absolute', top: '10%', right: '50%' }).appendTo("body");
+    $("<input>").attr( {type:'text', id: 'search_merchants', placeholder: 'enter location'}).css( {position:'fixed', top: '4%', right: '50%' }).appendTo("body");
     $("#search_merchants").on('keyup', function(event){
       if (event.which === 13 || event.keyCode === 13){
         var searchString = $(this).val();
@@ -31,9 +42,10 @@ var Landing = {
             dataType: "json",
             data: { latitude: latitude, longitude: longitude }
           }).done(function(data){
-            var offset = (window.innerWidth * -1) + 600 ;
+            current_merchant_index = 0;
+            var offset = -50;
             data.merchants.forEach(function(merchant){
-              offset += window.innerWidth;
+              offset += 100;
               addMerchant(merchant, offset);
             });
           });
@@ -43,41 +55,58 @@ var Landing = {
 
     $("body").on('keyup', function(event){
       if (event.which === 37 || event.keyCode === 37){
+        current_merchant_index += 1;
+        if (current_merchant_index < 0){
+          current_merchant_index = 0;
+        } else if (current_merchant_index > 19){
+          current_merchant_index = 19;
+        }
         $(".merchant").map(function(index, merchantArticle){
-          var leftPosition = parseInt($(merchantArticle).css('left'));
-          var newPosition = leftPosition - window.innerWidth;
-          $(merchantArticle).css('left', String(newPosition)+"px");
+          var newPosition = ((index - current_merchant_index)*100)+50;
+          $(merchantArticle).css('left', String(newPosition)+"%");
         });
       }
     });
 
     $("body").on('keyup', function(event){
       if (event.which === 39 || event.keyCode === 39){
+        current_merchant_index -= 1;
+        if (current_merchant_index < 0){
+          current_merchant_index = 0;
+        } else if (current_merchant_index > 19){
+          current_merchant_index = 19;
+        }
         $(".merchant").map(function(index, merchantArticle){
-          var leftPosition = parseInt($(merchantArticle).css('left'));
-          var newPosition = leftPosition+ window.innerWidth;
-          $(merchantArticle).css('left', String(newPosition)+"px");
+          var newPosition = ((index - current_merchant_index)*100)+50;
+          $(merchantArticle).css('left', String(newPosition)+"%");
         });
       }
     });
 
     $("body").on('keyup', function(event){
       if (event.which === 38 || event.keyCode === 38){
-        $(".merchant").map(function(index, merchantArticle){
-          var leftPosition = parseInt($(merchantArticle).css('left'));
-          var newPosition = leftPosition - (window.innerWidth / 2) + 350  ;
-          $(merchantArticle).css('left', String(newPosition)+"px");
-          $(merchantArticle).css('top', "5px");
-          $(merchantArticle).css('height', "20%");
-          $(merchantArticle).css('width', "100%");
-        });
       }
     });
 
     $("body").on('keyup', function(event){
       if (event.which === 40 || event.keyCode === 40){
-        $(".merchant").map(function(index, merchantArticle){
-
+        var merchant_index = $(".merchant").eq(current_merchant_index).attr('id').replace('merchant-', '');
+        $(".merchant").eq(current_merchant_index).css({ top: '30%', left: '30%', width: '60%', height: '80%'});
+        $.ajax({
+          type: "GET",
+          url: "welcome/getmenu",
+          dataType: "json",
+          data: { merchant_id: merchant_index }
+        }).done(function(data){
+          data.menu.forEach(function(category){
+            addMenuCategory(category);
+            category.children.forEach(function(subcategory){
+              addMenuSubCategory(subcategory);
+              subcategory.children.forEach(function(item){
+                addMenuItem(item, merchant_index);
+              });
+            });
+          });
         });
       }
     });
@@ -93,7 +122,7 @@ var Landing = {
         data: { merchant_id: $(".basket").attr('merchant_id'), guest_token: guestToken }
       }).done(function(data){
         console.log(data);
-        $(".basket").css({width: '300px', height: '400px'});
+        $(".basket").css({width: '250px', height: '400px'});
         $(".basket").text("");
         data.cart.forEach(function(item){
           addBasketItem(item);
@@ -112,7 +141,7 @@ var Landing = {
 
 
  function addMerchant(merchant, offset){
-    var merchantArticle = $("<article>").addClass("merchant").attr('id','merchant-'+merchant.id).css('left', String(offset)+'px');
+    var merchantArticle = $("<article>").addClass("merchant").attr('id','merchant-'+merchant.id).css('left', String(offset)+'%');
     var header = $("<header>").appendTo(merchantArticle);
     $("<h1>").text(merchant.summary.name).appendTo(header);
     var section = $("<section>").appendTo(merchantArticle);
@@ -122,7 +151,7 @@ var Landing = {
     $("<p>").text(merchant.location.street).appendTo(section);
     $("<p>").text(merchant.summary.description).appendTo(section);
     merchantArticle.on( "click", function(event) {
-      $(".items").text("");
+      merchantArticle.css({ top: '30%', left: '30%', width: '60%', height: '80%'});
       $.ajax({
         type: "GET",
         url: "welcome/getmenu",
@@ -149,8 +178,9 @@ var Landing = {
     $("<h1>").text(item.name).appendTo(header);
     var section = $("<section>").appendTo(itemArticle);
     $("<p>").text(item.description).appendTo(section);
-    $("<p>").text('Quantity: ' + item.min_qty + " - " + item.max_qty).appendTo(section);
-    $("<p>").text(item.price).appendTo(section);
+    var qty = $("<input>").attr('type','text').attr('placeholder','quantity').appendTo(section);
+    section.append("<br>" + item.min_qty + " - " + item.max_qty);
+    $("<p>").text("$ " + item.price).appendTo(section);
     var button = $("<button>").text('Add to Cart').on( "click", function(event){
       $.ajax({
         type: "POST",
@@ -158,30 +188,30 @@ var Landing = {
         dataType: "json",
         data: { merchant_id: merchant_id, guest_token: guestToken, item_id: item.id, item_qty: 1}
       }).done(function(data){
+        console.log(data);
         $("#subtotal").text(data.subtotal+" subtotal");
         $("#item_count").text(data.item_count +" item(s)");
         $(".basket").attr( "merchant_id", merchant_id );
       });
     });
     button.appendTo(section);
-    itemArticle.appendTo(".items");
+    itemArticle.appendTo($(".merchant").eq(current_merchant_index));
   }
 
   function addMenuCategory(category){
     var categoryArticle = $("<article>").addClass("category").attr('id','category-'+category.id);
     var header = $("<header>").appendTo(categoryArticle);
     $("<h1>").text(category.name).appendTo(header);
-    categoryArticle.appendTo(".items");
+    categoryArticle.appendTo($(".merchant").eq(current_merchant_index));
   }
 
   function addMenuSubCategory(subcategory){
     var subcategoryArticle = $("<article>").addClass("subcategory").attr('id','subcategory-'+subcategory.id);
     var header = $("<header>").appendTo(subcategoryArticle);
     $("<h1>").text(subcategory.name).appendTo(header);
-    subcategoryArticle.appendTo(".items");
+    subcategoryArticle.appendTo($(".merchant").eq(current_merchant_index));
   }
 
   function addBasketItem(item){
     $("<p>").attr( 'id' , item.id ).text(item.name + " " + item.price + " " + item.quantity).appendTo(".basket");
-
   }
