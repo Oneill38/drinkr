@@ -14,7 +14,7 @@
 //= require jquery_ujs
 
 //= require_tree .
-
 var guestToken = "";
 var deliveryUserToken = "";
 var venmoToken = "";
+var current_merchant_index = 0;
