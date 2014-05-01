@@ -30,9 +30,6 @@ describe "visiting the site" do
       wait_for_ajax
       expect(page).to have_selector('#item_count', text: '1 item(s)')
       expect(page).not_to have_selector('#item_count', text: '0 item(s)')
-
-
-
     end
 
   end
