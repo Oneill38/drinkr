@@ -1,14 +1,18 @@
 var Landing = {
 
   onReady: function() {
-    $.ajax({
-      type: "GET",
-      url: "welcome/getguesttoken",
-      dataType: "json"
-    }).done(function(data){
-      guestToken = data;
-    });
-    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/authorize?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global').attr('id','deliveryloginlink').text("Login with Delivery.com").appendTo("body");
+    if (deliveryUserToken === ""){
+      $.ajax({
+        type: "GET",
+        url: "welcome/getguesttoken",
+        dataType: "json"
+      }).done(function(data){
+        guestToken = data;
+      });
+    }
+    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/authorize?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global').attr('id','deliveryloginlink').text("Delivery.com - Login").appendTo("body");
+    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/credit_card/add?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global').attr('id','deliverycclink').text("Delivery.com - Add Card").appendTo("body");
+    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/account/create?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global').attr('id','deliverynewlink').text("Delivery.com - Sign Up").appendTo("body");
     $("<div>").addClass("basket").css( { position:'fixed', top: '3%', right: '3%', height: '100px', width: '200px'} ).appendTo("body");
     $("<p>").attr( 'id' , 'item_count' ).text("0 item(s)").appendTo(".basket");
     $("<p>").attr( 'id' , 'subtotal' ).text("0.00 subtotal").appendTo(".basket");
@@ -75,26 +79,83 @@ var Landing = {
 
     $("body").on('keyup', function(event){
       if (event.which === 38 || event.keyCode === 38){
-        $.ajax({
-          type: "GET",
-          url: "welcome/retrieveguestcart",
-          dataType: "json",
-          data: { merchant_id: $(".basket").attr('merchant_id'), guest_token: guestToken }
-        }).done(function(data){
-          console.log(data);
-          $(".basket").css({width: '250px', height: '400px'});
-          $(".basket").text("");
-          data.cart.forEach(function(item){
-            addBasketItem(item);
+        if (deliveryUserToken === ""){
+          $.ajax({
+            type: "GET",
+            url: "welcome/retrieveguestcart",
+            dataType: "json",
+            data: { merchant_id: $(".basket").attr('merchant_id'), guest_token: guestToken }
+          }).done(function(data){
+            console.log(data);
+            $(".basket").css({width: '250px', height: '400px'});
+            $(".basket").text("");
+            data.cart.forEach(function(item){
+              addBasketItem(item);
+            });
+            $("<p>").attr( 'id' , 'item_count' ).text(data.item_count+" item(s)").appendTo(".basket");
+            $("<p>").attr( 'id' , 'subtotal' ).text(data.subtotal+" subtotal").appendTo(".basket");
+            $("<p>").attr( 'id' , 'tax' ).text( data.tax + " tax").appendTo(".basket");
+            $("<p>").attr( 'id' , 'total' ).text( data.total +" total").appendTo(".basket");
+            $("<button>").attr('id','checkoutbutton').text("Checkout").appendTo(".basket");
+            $("#checkoutbutton").on('click', function(event){
+              $("<p>").text("must be logged into Delivery.com to checkout").appendTo(".basket");
+            });
           });
-          $("<p>").attr( 'id' , 'item_count' ).text(data.item_count+" item(s)").appendTo(".basket");
-          $("<p>").attr( 'id' , 'subtotal' ).text(data.subtotal+" subtotal").appendTo(".basket");
-          $("<p>").attr( 'id' , 'tax' ).text( data.tax + " tax").appendTo(".basket");
-          $("<p>").attr( 'id' , 'total' ).text( data.total +" total").appendTo(".basket");
-          $("<button>").text("Checkout").appendTo(".basket");
-          $("<button>").attr('id','venmo_split').text("Split using Venmo!").appendTo(".basket");
-          venmoFunctioning.onReady();
-        });
+        } else {
+          $.ajax({
+            type: "GET",
+            url: "welcome/retrieveusercart",
+            dataType: "json",
+            data: { merchant_id: $(".basket").attr('merchant_id'), delivery_token: deliveryUserToken }
+          }).done(function(data){
+            console.log(data);
+            $(".basket").css({width: '250px', height: '400px'});
+            $(".basket").text("");
+            data.cart.forEach(function(item){
+              addBasketItem(item);
+            });
+            $("<p>").attr( 'id' , 'item_count' ).text(data.item_count+" item(s)").appendTo(".basket");
+            $("<p>").attr( 'id' , 'subtotal' ).text(data.subtotal+" subtotal").appendTo(".basket");
+            $("<p>").attr( 'id' , 'tax' ).text( data.tax + " tax").appendTo(".basket");
+            $("<p>").attr( 'id' , 'total' ).text( data.total +" total").appendTo(".basket");
+            $("<button>").attr('id','checkoutbutton').text("Checkout").appendTo(".basket");
+            $("#checkoutbutton").on('click', function(event){
+              $.ajax({
+                type: "GET",
+                url: "welcome/getpayment",
+                dataType: "json",
+                data: { merchant_id: $(".basket").attr('merchant_id'), delivery_token: deliveryUserToken }
+              }).done(function(data){
+                console.log(data);
+                $("<div>").addClass("payment").css( { position:'fixed', bottom: '3%', right: '3%', height: '200px', width: '250px'} ).appendTo("body");
+                $("<p>").text(data.payment_methods.cash.max).appendTo(".payment");
+                $("<p>").text(data.payment_methods.credit_card[0].cc_type).appendTo(".payment");
+                $.ajax({
+                  type: "GET",
+                  url: "welcome/getlocations",
+                  dataType: "json",
+                  data: { delivery_token: deliveryUserToken }
+                }).done(function(data){
+                  $("<p>").text("Location " + data.locations[0].street).appendTo(".payment");
+                  $("<input>").attr('id','userlocation').attr('type','hidden').attr('value',data.locations[0].location_id).appendTo(".payment");
+                });
+                $("<button>").attr('id','order').text("Order").appendTo(".payment");
+                $("#order").on('click', function(event){
+                  $.ajax({
+                    type: "GET",
+                    url: "welcome/placeorder",
+                    dataType: "json",
+                    data: { merchant_id: $(".basket").attr('merchant_id'), delivery_token: deliveryUserToken, location: $("#userlocation").val() }
+                  }).done(function(data){
+                    $("<p>").text(data.message[0].user_msg).appendTo(".payment");
+                  });
+                });
+              });
+            });
+            $("<button>").attr('id','venmo_split').text("Split using Venmo!").appendTo(".basket");
+            venmoFunctioning.onReady();
+          });
+        }
       }
     });
 
@@ -164,17 +225,31 @@ var Landing = {
     var button = $("<button>").text('Add to Cart').on( "click", function(event){
       var merchantOpen = $(".merchant").eq(current_merchant_index).find("input[id=open]").val();
       if (merchantOpen === "true"){
-        $.ajax({
-          type: "POST",
-          url: "welcome/addtoguestcart",
-          dataType: "json",
-          data: { merchant_id: merchant_id, guest_token: guestToken, item_id: item.id, item_qty: 1}
-        }).done(function(data){
-          console.log(data);
-          $("#subtotal").text(data.subtotal+" subtotal");
-          $("#item_count").text(data.item_count +" item(s)");
-          $(".basket").attr( "merchant_id", merchant_id );
-        });
+        if (deliveryUserToken === ""){
+          $.ajax({
+            type: "POST",
+            url: "welcome/addtoguestcart",
+            dataType: "json",
+            data: { merchant_id: merchant_id, guest_token: guestToken, item_id: item.id, item_qty: 1}
+          }).done(function(data){
+            console.log(data);
+            $("#subtotal").text(data.subtotal+" subtotal");
+            $("#item_count").text(data.item_count +" item(s)");
+            $(".basket").attr( "merchant_id", merchant_id );
+          });
+        } else {
+          $.ajax({
+            type: "POST",
+            url: "welcome/addtocart",
+            dataType: "json",
+            data: { merchant_id: merchant_id, guest_token: guestToken, item_id: item.id, item_qty: 1}
+          }).done(function(data){
+            console.log(data);
+            $("#subtotal").text(data.subtotal+" subtotal");
+            $("#item_count").text(data.item_count +" item(s)");
+            $(".basket").attr( "merchant_id", merchant_id );
+          });
+        }
       }
     });
     button.appendTo(section);
