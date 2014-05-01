@@ -6,6 +6,8 @@ ERD: https://github.com/Oneill38/drinkr/blob/master/erd.jpg
 
 PIVOTAL TRACKER: https://www.pivotaltracker.com/s/projects/1067250
 
+Heroku: http://drink-r.herokuapp.com/
+
 ---
 TEAM Genesis/Vinegar/Salamander:
 
