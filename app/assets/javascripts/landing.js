@@ -242,7 +242,7 @@ var Landing = {
             type: "POST",
             url: "welcome/addtocart",
             dataType: "json",
-            data: { merchant_id: merchant_id, guest_token: guestToken, item_id: item.id, item_qty: 1}
+            data: { merchant_id: merchant_id, delivery_token: deliveryUserToken, item_id: item.id, item_qty: 1}
           }).done(function(data){
             console.log(data);
             $("#subtotal").text(data.subtotal+" subtotal");

@@ -60,7 +60,7 @@ class WelcomeController < ApplicationController
 
   def addtocart
     response = HTTParty.post("http://sandbox.delivery.com/customer/cart/#{params[:merchant_id]}",
-      :headers => { "authorization" => current_user.delivery_token },
+      :headers => { "authorization" => params[:delivery_token] },
       :query => { :client_id => ENV['DELIVERY_API_DEV_client_id'],
         :item => { :item_id => params[:item_id], :item_qty => params[:item_qty] }
       }
