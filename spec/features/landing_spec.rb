@@ -4,20 +4,20 @@ describe "visiting the site" do
 
   describe "a new user visits the hompage" do
 
-    # it "can see merchants in area", :js => true do
-    #   visit root_path
-    #   fill_in 'search_merchants', with: 'soho'
-    #   find_field('search_merchants').native.send_key(:return)
-    #   expect(page).to have_content "Liquors"
-    # end
+    it "can see merchants in area", :js => true do
+      visit root_path
+      fill_in 'search_merchants', with: 'soho'
+      find_field('search_merchants').native.send_key(:return)
+      expect(page).to have_content "Liquors"
+    end
 
-    # it "can see drinks from a merchant", :js => true do
-    #   visit root_path
-    #   fill_in 'search_merchants', with: 'soho'
-    #   find_field('search_merchants').native.send_key(:return)
-    #   find('#merchant-30782').native.send_keys(:down)
-    #   expect(page).to have_content "Vodka"
-    # end
+    it "can see drinks from a merchant", :js => true do
+      visit root_path
+      fill_in 'search_merchants', with: 'soho'
+      find_field('search_merchants').native.send_key(:return)
+      find('#merchant-30782').native.send_keys(:down)
+      expect(page).to have_content "Vodka"
+    end
 
    #  it "gets a guest token", :js => true do
    #    visit root_path
