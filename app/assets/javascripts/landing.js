@@ -10,9 +10,9 @@ var Landing = {
         guestToken = data;
       });
     }
-    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/authorize?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global').attr('id','deliveryloginlink').text("Delivery.com - Login").appendTo("body");
-    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/credit_card/add?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global').attr('id','deliverycclink').text("Delivery.com - Add Card").appendTo("body");
-    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/account/create?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://localhost:3000&response_type=code&scope=global').attr('id','deliverynewlink').text("Delivery.com - Sign Up").appendTo("body");
+    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/authorize?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://drink-r.herokuapp.com&response_type=code&scope=global').attr('id','deliveryloginlink').text("Delivery.com - Login").appendTo("body");
+    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/credit_card/add?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://drink-r.herokuapp.com&response_type=code&scope=global').attr('id','deliverycclink').text("Delivery.com - Add Card").appendTo("body");
+    $("<a>").attr('href', 'http://sandbox.delivery.com/third_party/account/create?client_id=NmUzODZkMzliOTJhOWI3NDk3YjdlZDM0MzdjMDliM2Zj&redirect_uri=http://drink-r.herokuapp.com&response_type=code&scope=global').attr('id','deliverynewlink').text("Delivery.com - Sign Up").appendTo("body");
     $("<div>").addClass("basket").css( { position:'fixed', top: '3%', right: '3%', height: '100px', width: '200px'} ).appendTo("body");
     $("<p>").attr( 'id' , 'item_count' ).text("0 item(s)").appendTo(".basket");
     $("<p>").attr( 'id' , 'subtotal' ).text("0.00 subtotal").appendTo(".basket");
@@ -254,7 +254,7 @@ var Landing = {
             type: "POST",
             url: "welcome/addtocart",
             dataType: "json",
-            data: { merchant_id: merchant_id, guest_token: guestToken, item_id: item.id, item_qty: 1}
+            data: { merchant_id: merchant_id, delivery_token: deliveryUserToken, item_id: item.id, item_qty: 1}
           }).done(function(data){
             console.log(data);
             $("#subtotal").text(data.subtotal+" subtotal");
