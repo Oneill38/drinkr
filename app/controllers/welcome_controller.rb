@@ -1,16 +1,21 @@
 class WelcomeController < ApplicationController
 
   def index
+    if user_signed_in? && params[:code]
+      response = HTTParty.post("http://sandbox.delivery.com/third_party/access_token",
+        :query => { :client_id => ENV['DELIVERY_API_DEV_client_id'],
+          :grant_type => "authorization_code",
+          :client_secret => ENV['DELIVERY_API_DEV_secret'],
+          :redirect_uri => "http://localhost:3000",
+          :code => params[:code]
+        }
+      )
+      current_user.delivery_token = response["access_token"]
+      current_user.save
+    end
+
     @delivery_user_code = params[:code]
     $venmo_token = params[:access_token]
-
-    # if params[:code]
-    #   :json => { delivery_user_code: params[:code] , venmo_token: params[:access_token] }
-    # end
-
-    # if params[:access_token]
-    #   :json => { delivery_user_code: params[:code] , venmo_token: params[:access_token] }
-    # end
 
   end
 
@@ -53,6 +58,16 @@ class WelcomeController < ApplicationController
     render :json => response
   end
 
+  def addtocart
+    response = HTTParty.post("http://sandbox.delivery.com/customer/cart/#{params[:merchant_id]}",
+      :headers => { "authorization" => current_user.delivery_token },
+      :query => { :client_id => ENV['DELIVERY_API_DEV_client_id'],
+        :item => { :item_id => params[:item_id], :item_qty => params[:item_qty] }
+      }
+    )
+    render :json => response
+  end
+
   def retrieveguestcart
     response = HTTParty.get("http://sandbox.delivery.com/customer/cart/#{params[:merchant_id]}",
       :headers => { "Guest-Token" => params[:guest_token] },
@@ -61,18 +76,55 @@ class WelcomeController < ApplicationController
     render :json => response
   end
 
-  def third_party_authorize
-    response = HTTParty.get("http://sandbox.delivery.com/third_party/authorize",
-      :query => { :client_id => ENV['DELIVERY_API_DEV_client_id'],
-        :redirect_uri => "http://localhost:3000",
-        :response_type => "code",
-        :scope => "global" }
+  def retrieveusercart
+    response = HTTParty.get("http://sandbox.delivery.com/customer/cart/#{params[:merchant_id]}",
+      :headers => { "authorization" => params[:delivery_token] },
+      :query => { :client_id => ENV['DELIVERY_API_DEV_client_id'], :order_type => "pickup"}
     )
-    render :json => response.to_json
+    render :json => response
   end
 
-  def authorize
-    binding.pry
+  def getpayment
+    response = HTTParty.get("https://sandbox.delivery.com/customer/cart/#{params[:merchant_id]}/checkout",
+      :headers => { "authorization" => params[:delivery_token] }
+    )
+    render :json => response
+  end
+
+  def clearcart
+    response = HTTParty.delete("https://sandbox.delivery.com/customer/cart/30782", :headers => {"authorization"=>"W8H1K8xYQPOO3wu229w5VBWFFLVzBtEAxbp8STYq"})
+  end
+
+  def placeorder
+    response = HTTParty.post("https://sandbox.delivery.com/customer/cart/#{params[:merchant_id]}/checkout",
+      :headers => { "authorization" => params[:delivery_token] },
+      :query => { :order_type => "pickup",
+                        :location_id => params[:location].to_i,
+                        :payments => [ { :type => "cash" } ]
+      }
+    )
+    render :json => response
+  end
+
+  def createlocation
+    response = HTTParty.post("https://sandbox.delivery.com/customer/location",
+      :headers => { "authorization" => params[:delivery_token] },
+      :query => {
+        :street    => "235 Park Ave S",
+        :city      => "New York",
+        :state     => "NY",
+        :zip_code  => "10003",
+        :phone     => "555-555-5555"
+      }
+    )
+    render :json => response
+  end
+
+  def getlocations
+    response = HTTParty.get("https://sandbox.delivery.com/customer/location",
+      :headers => { "authorization" => params[:delivery_token] }
+    )
+    render :json => response
   end
 
   def makevenmopayment
