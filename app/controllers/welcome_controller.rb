@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
 
   def index
     @delivery_user_code = params[:code]
-    @venmo_token = params[:access_token]
+    $venmo_token = params[:access_token]
 
     # if params[:code]
     #   :json => { delivery_user_code: params[:code] , venmo_token: params[:access_token] }
@@ -73,6 +73,17 @@ class WelcomeController < ApplicationController
 
   def authorize
     binding.pry
+  end
+
+  def makevenmopayment
+    amount = "-" + params[:amount]
+    response = HTTParty.post('https://sandbox-api.venmo.com/v1/payments',
+     :query => { :access_token => $venmo_token,
+                 :email => params[:email],
+                 :note => params[:note],
+                 :amount => amount})
+
+    render :json => response.to_json
   end
 
 end
