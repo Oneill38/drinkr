@@ -42,6 +42,7 @@ var Landing = {
             dataType: "json",
             data: { latitude: latitude, longitude: longitude }
           }).done(function(data){
+            console.log(data)
             current_merchant_index = 0;
             var offset = -50;
             data.merchants.forEach(function(merchant){
@@ -121,7 +122,6 @@ var Landing = {
         dataType: "json",
         data: { merchant_id: $(".basket").attr('merchant_id'), guest_token: guestToken }
       }).done(function(data){
-        console.log(data);
         $(".basket").css({width: '250px', height: '400px'});
         $(".basket").text("");
         data.cart.forEach(function(item){
