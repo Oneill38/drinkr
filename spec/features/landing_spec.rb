@@ -19,6 +19,15 @@ describe "visiting the site" do
       expect(page).to have_content "Vodka"
     end
 
+    it "can add an item to cart", :js => true do
+      visit root_path
+      fill_in 'search_merchants', with: 'soho'
+      find_field('search_merchants').native.send_key(:return)
+      find('#merchant-30782').native.send_keys(:down)
+      find("#button-N292").click
+      expect(find(".basket")).to have_content "29.99"
+    end
+
    #  it "gets a guest token", :js => true do
    #    visit root_path
    #    fill_in 'search_merchants', with: 'soho'
